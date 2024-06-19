@@ -1,6 +1,6 @@
 async function listarVideos() {
   const conexion = await fetch("http://localhost:3001/videos");
-  const conversion = conexion.json();
+  const conversion = await conexion.json();
 
   return conversion;
 }
@@ -17,9 +17,7 @@ async function enviarVideos(titulo, descripcion, url, imagem) {
     }),
   });
 
-  console.log("Estoy ACA enviarVideos");
-
-  const conversion = conexion.json();
+  const conversion = await conexion.json();
 
   return conversion;
 }
