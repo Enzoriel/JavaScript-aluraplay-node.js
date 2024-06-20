@@ -2,7 +2,7 @@ import { conversionAPI } from "./conexionAPI.js";
 
 const lista = document.querySelector("[data-lista]");
 
-function crearCard(titulo, descripcion, url, imagem) {
+export default function crearCard(titulo, descripcion, url, imagem) {
   const video = document.createElement("li");
   video.className = "videos__item";
   video.innerHTML = `<iframe
@@ -20,9 +20,13 @@ function crearCard(titulo, descripcion, url, imagem) {
 }
 
 async function listarVideos() {
-  const listaAPI = await conversionAPI.listarVideos();
+  try {
+    const listaAPI = await conversionAPI.listarVideos();
 
-  listaAPI.forEach((video) => lista.appendChild(crearCard(video.titulo, video.descripcion, video.url, video.imagem)));
+    listaAPI.forEach((video) => lista.appendChild(crearCard(video.titulo, video.descripcion, video.url, video.imagem)));
+  } catch {
+    lista.innerHTML = `<h2>Ha ocurrido un erro al intentar obtener los resultados :D <h2>`;
+  }
 }
 
 listarVideos();

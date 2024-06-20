@@ -11,9 +11,13 @@ async function crearVideos(evento) {
 
   const descripcion = Math.floor(Math.random() * 10).toString();
 
-  await conversionAPI.enviarVideos(titulo, descripcion, url, imagem);
+  try {
+    await conversionAPI.enviarVideos(titulo, descripcion, url, imagem);
 
-  window.location.href = "../pages/envio-concluido.html";
+    window.location.href = "../pages/envio-concluido.html";
+  } catch (e) {
+    alert(e);
+  }
 }
 
 formulario.addEventListener("submit", (evento) => crearVideos(evento));

@@ -19,10 +19,22 @@ async function enviarVideos(titulo, descripcion, url, imagem) {
 
   const conversion = await conexion.json();
 
+  if (!conexion.ok) {
+    throw new Error("Ha ocurrido un error al intentar enviar el video");
+  }
+
+  return conversion;
+}
+
+async function buscarVideos(palabraClave) {
+  const conexion = await fetch(`http://localhost:3001/videos?q=${palabraClave}`);
+  const conversion = await conexion.json();
+
   return conversion;
 }
 
 export const conversionAPI = {
   listarVideos,
   enviarVideos,
+  buscarVideos,
 };
